@@ -1,0 +1,142 @@
+// Title: Accordion - Astro
+// Language: other
+// Tags: Astro, Snippet, Accordion, Tailwind, Alpine.js, Tutorial, LexThemes
+// Created: 10/5/2025
+// Snippet ID: 06502088-66e0-4ead-8227-b8d5640fd881
+
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import TutorialBanner from "@/components/global/TutorialBanner.astro";
+import {
+  generateArticleSchema,
+  generateBreadcrumbSchema,
+  generateHowToSchema,
+} from "@/utils/jsonLd";
+
+// SEO Configuration
+const seoConfig = {
+  title: "How to Create an Accordion with Tailwind CSS and Alpine.js",
+  description:
+    "Learn how to build an accessible, interactive accordion component using Tailwind CSS and Alpine.js. Step-by-step tutorial with code examples.",
+  canonical: "/accordion",
+  jsonLd: [
+    generateArticleSchema({
+      title: "How to Create an Accordion with Tailwind CSS and Alpine.js",
+      description:
+        "Learn how to build an accessible, interactive accordion component using Tailwind CSS and Alpine.js.",
+      url: "/accordion",
+      datePublished: "2024-01-15T09:00:00Z",
+      dateModified: "2024-01-15T09:00:00Z",
+      keywords: [
+        "Tailwind CSS",
+        "Alpine.js",
+        "Accordion",
+        "Tutorial",
+        "Web Components",
+        "Frontend Development",
+      ],
+    }),
+    generateBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Accordion Tutorial", url: "/accordion" },
+    ]),
+    generateHowToSchema({
+      name: "Create an Accordion with Tailwind CSS and Alpine.js",
+      description:
+        "Step-by-step guide to building an interactive accordion component",
+      totalTime: "PT15M",
+      steps: [
+        {
+          name: "Set up Alpine.js data",
+          text: "Initialize Alpine.js with x-data to track the open accordion index",
+        },
+        {
+          name: "Create accordion structure",
+          text: "Build the HTML structure with buttons and content panels",
+        },
+        {
+          name: "Add Tailwind CSS styling",
+          text: "Style the accordion with Tailwind utility classes for a polished look",
+        },
+        {
+          name: "Implement click handlers",
+          text: "Add Alpine.js click handlers to toggle accordion items",
+        },
+      ],
+    }),
+  ],
+};
+---
+
+<BaseLayout seo={seoConfig}>
+  <section>
+  <h1 class="sr-only">How to Create an Accordion with Tailwind CSS and Alpine.js</h1>
+
+    <TutorialBanner
+      tutorialUrl="https://lexingtonthemes.com/tutorials/how-to-create-an-accordion-with-tailwind-css-and-alpinejs"
+      codeUrl="https://github.com/Lexington-Themes/lexington-tutorials/blob/main/src/pages/accordion/index.astro"
+    />
+    <Wrapper class="py-24 lg:py-48">
+      <div
+        x-data="{ openIndex: null }"
+        class="max-w-md mx-auto divide-y divide-base-200"
+      >
+        <!-- Accordion Item 1 -->
+        <div>
+          <button
+            @click="openIndex === 0 ? openIndex = null : openIndex = 0"
+            class="flex items-center justify-between w-full py-4 text-sm focus:outline-none text-base-500 focus:text-accent-500"
+          >
+            <span>What time is it?</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 transform transition-transform"
+              :class="{ 'rotate-45': openIndex === 0 }"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"></path>
+            </svg>
+          </button>
+          <div x-show="openIndex === 0" class="py-4 text-xs text-base-500">
+            I don't know what time it is.
+          </div>
+        </div>
+
+        <!-- Accordion Item 2 -->
+        <div>
+          <button
+            @click="openIndex === 1 ? openIndex = null : openIndex = 1"
+            class="flex items-center justify-between w-full py-4 text-sm focus:outline-none text-base-500 focus:text-accent-500"
+          >
+            <span>Why not?</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 transform transition-transform"
+              :class="{ 'rotate-45': openIndex === 1 }"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"></path>
+            </svg>
+          </button>
+          <div x-show="openIndex === 1" class="py-4 text-xs text-base-500">
+            Because I have lost the notion of time.
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>
